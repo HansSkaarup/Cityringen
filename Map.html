@@ -1,10 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset= "utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Semester 1 Group Project</title>
+    <!--Leaflet-->
+    <!--include leaflet CSS-->
+    <link rel="stylesheet" href="lib/leaflet/leaflet.css"/>
+    <script src="lib/jquery/jquery-3.1.1.min.js"></script>
+    <!--include leaflet javascript file-->
+    <script src="lib/leaflet/leaflet.js"></script>
+    <script>// type="text/javascript" src="dist/leaflet.ajax.js"></script>
+    <!--include awesome markers-->
+    <link rel="stylesheet" href="lib/Awesome-markers/dist/leaflet.awesome-markers.css">
+    <script src="lib/Awesome-markers/dist/leaflet.awesome-markers.js"></script>
+    <!--include sidebar files-->
+    <script src="https://use.fontawesome.com/fea527cdc3.js"></script>
+    <link rel="stylesheet" href="lib/sidebar-v2-master/css/leaflet-sidebar.css" />
+    <script type="text/javascript" src="lib/sidebar-v2-master/js/leaflet-sidebar.js"></script>
+    <!--Load Dawa autocomplete-->
+    <link rel="stylesheet" href="lib/jquery-ui/themes/start/jquery-ui.css">
+    <link rel="stylesheet" href="lib/jquery-ui/themes/start/theme.css">
+    <script src="lib/jquery-ui/jquery-ui.js"></script>
+    <script src="lib/autocomplete-0.4.1/dawa-autocomplete.js"></script>
+    <!---graph-->
+    <script src="lib/canvasjs.min.js"></script>
+
+
     <meta charset="UTF-8">
     <title>Title</title>
-</head>
-<body>
 
-</body>
+    <Style>
+           /*Set font*/
+        h1 {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        p {
+            font-family:  Arial, Helvetica, sans-serif;
+        }
+        /*to get a full screen map*/
+        html, body,#mapid{
+            height:100%;
+            width:100%;
+            padding: 0;
+            margin: 0;
+        }
+        /*Sidebar header and tabs color*/
+        .sidebar-header {
+  background-color: #e68a00; }
+        .sidebar-tabs > li.active, .sidebar-tabs > ul > li.active {
+        background-color: #e68a00; }
+
+        /*leaflet control layer setting*/
+        .leaflet-control-layers-toggle {
+            width: auto;
+        }
+        /*Autocomplete dropdown height/Z value*/
+        .ui-front {z-index: 9999999 !important;  }
+
+.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+.info h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
+    </Style>
+</head>
+<body onload="differencemap()">>
+
+<div id="sidebar" class="sidebar collapsed">
+    <!-- Nav tabs -->
+    <div class="sidebar-tabs">
+        <ul role="tablist">
+            <li><a href="#home" role="tab"><i class="fa fa-search"></i></a></li>
+            <li id="sidebarlocked3" ><a href="#transit" role="tab"><i class="fa fa-map-o"></i></a></li>
+            <li id="sidebarlocked4" ><a href="#ageStructure" role="tab"><i class="fa fa-train"></i></a></li>
+            <li><a href="https://github.com/HansSkaarup/Cityringen" role="tab" target="_blank"><i class="fa fa-github"></i></a></li>
+        </ul>
+
+        <ul role="tablist">
+            <li class="disabled"><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
+        </ul>
+    </div>
+
+    <!-- Tab panes -->
+    <div class="sidebar-content">
+        <div class="sidebar-pane" id="home">
+            <h1 class="sidebar-header">
+                search address
+                <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+            </h1>
+
+            <!-- Autocomplete adress search line -->
+            <p><label for="adgangsadresse-autocomplete">Enter an origin address in Copenhagen:</label></p>
+            <input type="text" id="adgangsadresse-autocomplete" style="width: 350px;">
+
+                        <p>_______________________________________________</p>
+            <p><label for="adgangsadresse-autocomplete">Enter destination address in Copenhagen to find the shortest path now and in the future:</label></p>
+            <input type="text" id="adgangsadresse-autocomplete2" style="width: 350px;">
+
+           <button type="button" onclick=sqlfunction()><b>GO!</b></button>
+            <p id="showdata1"></p>
+            <p id="showdata2"></p>
+            <p id="showdata3"></p>
+            <p id="showdata4"></p>
+            <p> This is a web GIS application that uses custom made GIS networks to analyse routes and locations in Copenhagen based on the current public transportation network and the changes occurring with Cityringen.</p>
+            <p> The application can both find the fastest path between two points in both current and future to compare the routes but also do one-to-many analysis based on the origin to all areas of Copenhagen.</p>
+
+
+        </div>
+
+        <div class="sidebar-pane" id="ageStructure">
+            <h1 class="sidebar-header">Path Tree Comparison<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+
+            <iframe width="100%" height="520" frameborder="0" src="https://hasl16.carto.com/builder/fb9cf1b8-534e-11e7-914e-0e3a376473ab/embed" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+            <a href="https://hasl16.carto.com/builder/fb9cf1b8-534e-11e7-914e-0e3a376473ab/embed">Link to Map</a>
+            <p class="lorem" style="font-size:12px; margin-top:450px;">Embedded map made by CartoDBt</p>
+        </div>
+
+
+        <div class="sidebar-pane" id="transit">
+            <h1 class="sidebar-header">Minutemap<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+
+             <button type="button" onclick=onetomany()><b>Compute Minutemap</b></button>
+            <p>Change opacity of the Minutemap</p>
+            <input id="slide" type="range" min="0" max="1" step="0.1" value="1" onchange="updateOpacity(this.value)">
+
+
+        </div>
+
+        <div class="sidebar-pane" id="settings">
+            <h1 class="sidebar-header">Settings<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+        </div>
+    </div>
+</div>
+
+<!--div element with id where you want your map to be-->
+<div id="mapid"></div>
+
+<script src="Initiate.js"></script>
+<script src="function1.js"></script>
+<script src="current_minutemap.js"></script>
+<script src="Difference.js"></script>
+    </body>
 </html>
