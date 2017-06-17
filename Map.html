@@ -119,8 +119,9 @@
             <h1 class="sidebar-header">Minutemap<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
             <p></p>
             <button type="button" onclick=onetomany()><b>Compute Minutemap based on origin address</b></button>
-            <p>Change opacity of the Minutemap</p>
-            <input id="slide" type="range" min="0" max="1" step="0.1" value="1" onchange="updateOpacity(this.value)">
+            <p>Change opacity of the Layer</p>
+            <input id="slide" type="range" min="0" max="1" step="0.05" value="0.7" onchange="updateOpacity(this.value)">
+             <button type="button" onclick=bringtofront()><b>bring to front</b></button>
 
                         <p>_______________________________________________</p>
             <p>The Minutemap visualizes the traveltime to parts of Copenhagen from the origin address.
@@ -136,6 +137,9 @@
             <button type="button" onclick=daydifferencemap()><b>Show Overall Average Improvement at Day</b></button>
             <p></p>
             <button type="button" onclick=differencemap()><b>Show Overall Average Improvement at Night</b></button>
+
+            <p>Change opacity of the Layer</p>
+            <input id="slide" type="range" min="0" max="1" step="0.05" value="0.85" onchange="updateOpacity(this.value)">
 
             <p>_______________________________________________</p>
             <p>The Average improvment maps visualize the overall improvment in traveltime to all other tiles shown on the map</p>
@@ -165,9 +169,15 @@
 
 <!--div element with id where you want your map to be-->
 <div id="mapid"></div>
+<script>
+function updateOpacity(value) {
+    minutemap2leaflet.setStyle({fillOpacity: value}),
+            difmap.setStyle({fillOpacity: value});
+}
 
+</script>
 <script src="Initiate.js"></script>
-<script src="function1.js"></script>
+<script src="Address_one-to-one.js"></script>
 <script src="current_minutemap.js"></script>
 <script src="Difference.js"></script>
     </body>

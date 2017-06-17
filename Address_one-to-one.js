@@ -122,8 +122,7 @@
                     + adressedata.features["0"].properties.adresse + ' and '
                     + destination.features["0"].properties.adresse + ' is represented by the lightblue line.';
         })
-                layerGroup2.setZIndex(10000);
-            //})
+
         };
 
 

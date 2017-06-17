@@ -4,6 +4,7 @@
 //MASTER FUNCTION - Finds id and .then to the rest of minutemap chain:
          function differencemap() {
     //Refreshes/Clears minutemap.
+    layerGroup3.clearLayers();
     layerGroup4.clearLayers();
 
     if (typeof info !== 'undefined') {
@@ -21,6 +22,7 @@
 //MASTER FUNCTION FUTURE - Finds id and .then to the rest of minutemap chain:
          function daydifferencemap() {
     //Refreshes/Clears minutemap.
+    layerGroup3.clearLayers();
     layerGroup4.clearLayers();
 
     if (typeof info !== 'undefined') {
@@ -28,7 +30,7 @@
     }
 
     //.when and getJSON
-    $.when($.getJSON('php/difference.php?dif=' + "a", function (differencedata) {
+    $.when($.getJSON('php/fur_difference.php?dif=' + "a", function (differencedata) {
             console.log(differencedata);
             difdata = differencedata;
 
@@ -80,7 +82,7 @@ info.update = function (props) {
                     weight: 0.5,
                     opacity: 4,
                     color: 'black',
-                    fillOpacity: 0.7
+                    fillOpacity: 0.85
                 };
 
             }

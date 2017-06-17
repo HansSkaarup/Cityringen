@@ -144,6 +144,7 @@ layerGroup3.addLayer(minutemap2leaflet);
 
 
 
+
             //ADD MINUTEMAP with styles and listernes to layergroup3 and then to the map
 
 

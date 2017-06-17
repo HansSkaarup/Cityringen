@@ -17,6 +17,7 @@
     var difdata;
     //highlight/mouseover test
     var geojson;
+    var pgrouting2leaflet2;
 
     	//Variables containing custom markers based on the "AwesomeMarkers" library.
     var redMarker = new L.AwesomeMarkers.icon({
@@ -48,6 +49,7 @@
     //difference layergroup
     var layerGroup4 = L.layerGroup();
     layerGroup4.addTo(mymap);
+
 
 
     //load a tile layer Mapbox Streets tile layer
