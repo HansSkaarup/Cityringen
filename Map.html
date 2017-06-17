@@ -72,7 +72,7 @@
 }
     </Style>
 </head>
-<body onload="differencemap()">>
+
 
 <div id="sidebar" class="sidebar collapsed">
     <!-- Nav tabs -->
@@ -80,7 +80,8 @@
         <ul role="tablist">
             <li><a href="#home" role="tab"><i class="fa fa-search"></i></a></li>
             <li id="sidebarlocked3" ><a href="#transit" role="tab"><i class="fa fa-map-o"></i></a></li>
-            <li id="sidebarlocked4" ><a href="#ageStructure" role="tab"><i class="fa fa-train"></i></a></li>
+            <li id="difference" ><a href="#differencem" role="tab"><i class="fa fa-map"></i></a></li>
+            <li id="sidebarlocked4" ><a href="#pathtree" role="tab"><i class="fa fa-train"></i></a></li>
             <li><a href="https://github.com/HansSkaarup/Cityringen" role="tab" target="_blank"><i class="fa fa-github"></i></a></li>
         </ul>
 
@@ -93,7 +94,7 @@
     <div class="sidebar-content">
         <div class="sidebar-pane" id="home">
             <h1 class="sidebar-header">
-                search address
+                Address Inputs
                 <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
             </h1>
 
@@ -112,28 +113,49 @@
             <p id="showdata4"></p>
             <p> This is a web GIS application that uses custom made GIS networks to analyse routes and locations in Copenhagen based on the current public transportation network and the changes occurring with Cityringen.</p>
             <p> The application can both find the fastest path between two points in both current and future to compare the routes but also do one-to-many analysis based on the origin to all areas of Copenhagen.</p>
-
-
         </div>
-
-        <div class="sidebar-pane" id="ageStructure">
-            <h1 class="sidebar-header">Path Tree Comparison<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-
-            <iframe width="100%" height="520" frameborder="0" src="https://hasl16.carto.com/builder/fb9cf1b8-534e-11e7-914e-0e3a376473ab/embed" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
-            <a href="https://hasl16.carto.com/builder/fb9cf1b8-534e-11e7-914e-0e3a376473ab/embed">Link to Map</a>
-            <p class="lorem" style="font-size:12px; margin-top:450px;">Embedded map made by CartoDBt</p>
-        </div>
-
 
         <div class="sidebar-pane" id="transit">
             <h1 class="sidebar-header">Minutemap<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-
-             <button type="button" onclick=onetomany()><b>Compute Minutemap</b></button>
+            <p></p>
+            <button type="button" onclick=onetomany()><b>Compute Minutemap based on origin address</b></button>
             <p>Change opacity of the Minutemap</p>
             <input id="slide" type="range" min="0" max="1" step="0.1" value="1" onchange="updateOpacity(this.value)">
 
+                        <p>_______________________________________________</p>
+            <p>The Minutemap visualizes the traveltime to parts of Copenhagen from the origin address.
+            This is done by calculating a one-to-many route to a sample point or centroid in each hexagon</p>
 
         </div>
+
+
+
+        <div class="sidebar-pane" id="differencem">
+            <h1 class="sidebar-header">Average Improvement Map<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+            <p></p>
+            <button type="button" onclick=daydifferencemap()><b>Show Overall Average Improvement at Day</b></button>
+            <p></p>
+            <button type="button" onclick=differencemap()><b>Show Overall Average Improvement at Night</b></button>
+
+            <p>_______________________________________________</p>
+            <p>The Average improvment maps visualize the overall improvment in traveltime to all other tiles shown on the map</p>
+            <p>As such, every hexagon value visualized is an average of the minutemap visualed in the previous tab</p>
+
+
+        </div>
+
+        <div class="sidebar-pane" id="pathtree">
+            <h1 class="sidebar-header">Path Tree Comparison<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+
+            <iframe width="100%" height="520" frameborder="0" src="https://hasl16.carto.com/builder/fb9cf1b8-534e-11e7-914e-0e3a376473ab/embed" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+            <p class="lorem" style="font-size:12px; margin-top:0px;">Embedded map created in CartoDB</p>
+            <a href="https://hasl16.carto.com/builder/fb9cf1b8-534e-11e7-914e-0e3a376473ab/embed">Link to Map</a>
+
+        </div>
+
+
+
+
 
         <div class="sidebar-pane" id="settings">
             <h1 class="sidebar-header">Settings<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>

@@ -4,6 +4,24 @@
 //MASTER FUNCTION - Finds id and .then to the rest of minutemap chain:
          function differencemap() {
     //Refreshes/Clears minutemap.
+    layerGroup4.clearLayers();
+
+    if (typeof info !== 'undefined') {
+        mymap.removeControl(info);
+    }
+
+    //.when and getJSON
+    $.when($.getJSON('php/difference.php?dif=' + "a", function (differencedata) {
+            console.log(differencedata);
+            difdata = differencedata;
+
+        })
+    ).then(visualizedifferencemap, differencemapfailed)
+};
+//MASTER FUNCTION FUTURE - Finds id and .then to the rest of minutemap chain:
+         function daydifferencemap() {
+    //Refreshes/Clears minutemap.
+    layerGroup4.clearLayers();
 
     if (typeof info !== 'undefined') {
         mymap.removeControl(info);
@@ -41,18 +59,17 @@ info.update = function (props) {
 	info.addTo(mymap);
 
             function getColor(d) {
-                return  d > 70 ? '#e31a1c' :
-                        d > 60 ? '#fc4e2a' :
-                        d > 50 ? '#fd8d3c' :
-                        d > 40 ? '#feb24c' :
-                        d > 30 ? '#fed976' :
-                        d > 25 ? '#ffeda0' :
-                        d > 0.6 ? '#ffffcc' :
-                        d > 0.5 ? '#d9f0a3' :
-                        d > 0.4 ? '#addd8e' :
-                        d > 0.3 ? '#41ab5d' :
-                        d > 0.2 ? '#238443' :
-                        d > 0.1 ? '#005a32' :
+                return  d > 10 ? '#005a32' :
+                        d > 7 ? '#41AB5D' :
+                        d > 6 ? '#54B36D' :
+                        d > 5 ? '#67BB7D' :
+                        d > 4 ? '#7AC48D' :
+                        d > 3 ? '#8DCC9D' :
+                        d > 2 ? '#A0D5AE' :
+                        d > 1 ? '#B3DDBE' :
+                        d > 0.5 ? '#C6E5CE' :
+                        d > 0.25? '#D9EEDE	' :
+                        d > 0 ? '#FFFFFF' :
                                  '#FFEDA0';
 
             }

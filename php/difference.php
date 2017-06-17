@@ -22,7 +22,7 @@ if (empty($_GET['dif'])) {
     $dif = $_GET['dif'];
 
 # Build SQL SELECT statement and return the geometry as a GeoJSON element in EPSG: 4326
-$sql = "SELECT avg_cost, st_asgeojson(geom, 4326) as geojson from current.sampling_grid";
+$sql = "SELECT avg_cost, st_asgeojson(st_transform(geom, 4326), 4326) as geojson from current.sampling_grid";
 
 
 
