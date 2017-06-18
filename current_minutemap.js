@@ -1,6 +1,8 @@
 /**
  * Created by skodmunk on 16/06/2017.
  */
+
+
 //MASTER FUNCTION - Finds id and .then to the rest of minutemap chain:
         function onetomany() {
              //Refreshes/Clears minutemap.
@@ -19,13 +21,9 @@
         };
 
 
-        function minutemapfail() {
-            console.log("minutemap Sample point ID failed to load")
-        }
-
 
 //SQL query to get minutemap grid and travel data based on Pgrouting.
-       function queryminutemap() {
+      function queryminutemap() {
             $.when($.getJSON('php/minutemap.php?vertice=' + verticeid, function (minutemap) {
                         console.log(minutemap);
                         minutemapdata = minutemap;
@@ -33,7 +31,37 @@
             ).then (visualizeminutemap, minutemapfail2)
         };
 
+//MASTER FUNCTION FUTURE - Finds id and .then to the rest of minutemap chain:
+         function randomuniquename() {
+             //Refreshes/Clears minutemap.
+         layerGroup3.clearLayers();
 
+            if (typeof info !== 'undefined') {
+                mymap.removeControl(info);
+            };
+            //.when and getJSON
+            $.when($.getJSON('php/fur_samplepointid.php?adresse=' + adressedata.features["0"].geometry.coordinates["0"] + ',' +
+                adressedata.features["0"].geometry.coordinates["1"], function (verticedata) {
+                        console.log(verticedata.features["0"].properties.fur_id);
+                        verticeid = verticedata.features["0"].properties.fur_id;
+                    })
+            ).then (randomuniquename2, minutemapfail)
+        };
+
+
+//SQL query to get minutemap grid and travel data based on Pgrouting.
+        function randomuniquename2() {
+            $.when($.getJSON('php/fur_minutemap.php?vertice=' + verticeid, function (minutemap) {
+                        console.log(minutemap);
+                        minutemapdata = minutemap;
+                    })
+            ).then (visualizeminutemap, minutemapfail2)
+        };
+
+
+        function minutemapfail() {
+        console.log("minutemap Sample point ID failed to load")
+        }
         function minutemapfail2() {
             console.log("minutemap data failed to load")
         }

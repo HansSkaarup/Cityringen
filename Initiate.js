@@ -17,7 +17,7 @@
     var difdata;
     //highlight/mouseover test
     var geojson;
-    var pgrouting2leaflet2;
+  //  var pgrouting2leaflet2;
 
     	//Variables containing custom markers based on the "AwesomeMarkers" library.
     var redMarker = new L.AwesomeMarkers.icon({
