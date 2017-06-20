@@ -17,6 +17,10 @@
     var difdata;
     //highlight/mouseover test
     var geojson;
+    //Dif_minutemap variables
+    var dif_fur_verticeid;
+    var dif_verticeid;
+    var difminutemaoutput;
   //  var pgrouting2leaflet2;
 
     	//Variables containing custom markers based on the "AwesomeMarkers" library.

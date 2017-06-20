@@ -125,6 +125,9 @@
             <input id="slide" type="range" min="0" max="1" step="0.05" value="0.7" onchange="updateOpacity(this.value)">
              <button type="button" onclick=bringtofront()><b>bring to front</b></button>
 
+            <p></p>
+             <button id="againreally" type="button" onclick="dif_minutemap()"><b>Compute Difference between Minutemaps based on origin address</b></button>
+
                         <p>_______________________________________________</p>
             <p>The Minutemap visualizes the traveltime to parts of Copenhagen from the origin address.
             This is done by calculating a one-to-many route to a sample point or centroid in each hexagon</p>
@@ -174,7 +177,8 @@
 <script>
 function updateOpacity(value) {
     minutemap2leaflet.setStyle({fillOpacity: value}),
-            difmap.setStyle({fillOpacity: value});
+            difmap.setStyle({fillOpacity: value}),
+            difminutemaoutput.setStyle({fillOpacity: value});;
 }
 
 </script>
@@ -182,5 +186,6 @@ function updateOpacity(value) {
 <script src="Address_one-to-one.js"></script>
 <script src="current_minutemap.js"></script>
 <script src="Difference.js"></script>
+<script src="dif_minute.js"></script>
     </body>
 </html>
