@@ -90,18 +90,19 @@ info.update = function (props) {
 	info.addTo(mymap);
 
             function getColor(d) {
-                return  d > 70 ? '#e31a1c' :
-                        d > 60 ? '#fc4e2a' :
-                        d > 50 ? '#fd8d3c' :
-                        d > 40 ? '#feb24c' :
-                        d > 30 ? '#fed976' :
-                        d > 25 ? '#ffeda0' :
-                        d > 20 ? '#ffffcc' :
-                        d > 15 ? '#d9f0a3' :
-                        d > 10 ? '#addd8e' :
-                        d > 5  ? '#41ab5d' :
-                        d > 2  ? '#238443' :
-                        d > 0  ? '#005a32' :
+                return  d > 90 ? '#e31a1c' :
+                        d > 80 ? '#fc4e2a' :
+                        d > 70 ? '#fd8d3c' :
+                        d > 60 ? '#feb24c' :
+                        d > 50 ? '#fed976' :
+                        d > 40 ? '#ffeda0' :
+                        d > 30 ? '#ffffcc' :
+                        d > 25 ? '#d9f0a3' :
+                        d > 20 ? '#addd8e' :
+                        d > 15 ? '#41ab5d' :
+                        d > 10 ? '#238443' :
+                        d > 5 ? '#116F3A':
+                        d > 0 ? '#005a32' :
                                  '#FFEDA0';
 
             }
@@ -110,7 +111,7 @@ info.update = function (props) {
                 return {
                     fillColor: getColor(feature.properties.cost_m),
                     weight: 0.5,
-                    opacity: 4,
+                    opacity: 0.7,
                     color: 'black',
                     fillOpacity: 0.7
                 };
